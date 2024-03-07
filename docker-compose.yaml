@@ -12,4 +12,4 @@ services:
       MYSQL_PASSWORD: 'new'
       MYSQL_ROOT_PASSWORD: 'new'
     volumes:
-      - /c/Users/step6/docker_volumes:/var/lib/mysql
+      - ${MYSQL_VOLUME_PATH}:/var/lib/mysql
