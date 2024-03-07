@@ -7,12 +7,15 @@ services:
       - '3306:3306'
     restart: always
     environment:
-      MYSQL_DATABASE: 'file-storage'
-      MYSQL_USER: 'aselium'
-      MYSQL_PASSWORD: 'new'
-      MYSQL_ROOT_PASSWORD: 'new'
+      MYSQL_DATABASE: file-storage
+      MYSQL_USER: aselium
+      MYSQL_PASSWORD: new
+      MYSQL_ROOT_PASSWORD: new
     volumes:
       - ${MYSQL_VOLUME_PATH}:/var/lib/mysql
+    networks:
+      - app_network
+
   minio:
     image: bitnami/minio
     ports:
@@ -20,9 +23,24 @@ services:
       - '9001:9001'
     restart: always
     environment:
-      - MINIO_ROOT_USER=myuser
-      - MINIO_ROOT_PASSWORD=mypassword
+      - MINIO_ROOT_USER=aselium
+      - MINIO_ROOT_PASSWORD=newpassword
       - MINIO_DEFAULT_BUCKETS=file-storage
     volumes:
       - ${MINIO_VOLUME_PATH}:/var/lib/minio
     command: minio server ${MINIO_VOLUME_PATH}:/data
+    networks:
+      - app_network
+
+  redis:
+    image: bitnami/redis
+    ports:
+      - '6379:6379'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
