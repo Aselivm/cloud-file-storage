@@ -13,3 +13,16 @@ services:
       MYSQL_ROOT_PASSWORD: 'new'
     volumes:
       - ${MYSQL_VOLUME_PATH}:/var/lib/mysql
+  minio:
+    image: bitnami/minio
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    restart: always
+    environment:
+      - MINIO_ROOT_USER=myuser
+      - MINIO_ROOT_PASSWORD=mypassword
+      - MINIO_DEFAULT_BUCKETS=file-storage
+    volumes:
+      - ${MINIO_VOLUME_PATH}:/var/lib/minio
+    command: minio server ${MINIO_VOLUME_PATH}:/data
