@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  database:
+    image: mysql:8.3.0
+    ports:
+      - '3306:3306'
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'file-storage'
+      MYSQL_USER: 'aselium'
+      MYSQL_PASSWORD: 'new'
+      MYSQL_ROOT_PASSWORD: 'new'
+    volumes:
+      - /c/Users/step6/docker_volumes:/var/lib/mysql
