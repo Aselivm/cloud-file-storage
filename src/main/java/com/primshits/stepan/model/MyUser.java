@@ -20,5 +20,7 @@ public class MyUser {
 
     private String password;
 
+
+    //todo без roles
     private String roles;
 }

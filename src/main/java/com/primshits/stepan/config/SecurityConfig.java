@@ -3,6 +3,7 @@ package com.primshits.stepan.config;
 import com.primshits.stepan.service.MyUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -23,15 +24,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/new-user").permitAll()
-                        .requestMatchers("/**").authenticated())
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST,"/new-user").permitAll()
+                        //todo написать все странички сюда
+                        .requestMatchers("/welcome").permitAll()
+                        .requestMatchers("/**").authenticated()
+                )
                 .build();
     }
     @Bean
     public UserDetailsService userDetailsService(){
         return new MyUserDetailsService();
     }
+
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
@@ -40,7 +45,6 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
