@@ -1,12 +1,11 @@
 package com.primshits.stepan.controller;
 
 import com.primshits.stepan.model.MyUser;
-import com.primshits.stepan.repository.UserRepository;
 import com.primshits.stepan.service.UserService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/")
+@Controller
 public class FileStorageController {
     private final UserService service;
 
@@ -23,5 +22,10 @@ public class FileStorageController {
     public String addUser(@RequestBody MyUser user){
         service.addUser(user);
         return "User saved";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
 }
