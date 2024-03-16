@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Sign up</title>
 </head>
 <body>
-<form>
+<form th:action="@{/sign-up}" method="post"  th:object="${user}">
   <label for="login">Login: </label>
-  <input id="login" placeholder="Type your login" type="text" name="login">
+  <input id="login" placeholder="Type your login" type="text" th:field="*{name}">
   <label for="password">Password: </label>
-  <input id="password" placeholder="Type your password" type="password" name="password">
+  <input id="password" placeholder="Type your password" type="password" th:field="*{password}">
   <button type="submit">Sign up!</button>
 </form>
 <br/>
