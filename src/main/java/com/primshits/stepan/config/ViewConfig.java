@@ -9,21 +9,11 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
 @Configuration
 public class ViewConfig {
-
-    private final ApplicationContext applicationContext;
-
-    public ViewConfig(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
-
     @Bean
     public SpringResourceTemplateResolver templateResolver(){
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setApplicationContext(this.applicationContext);
         templateResolver.setPrefix("classpath:/templates/");
         templateResolver.setSuffix(".html");
-        // todo good info: templates to be automatically updated when modified
-        templateResolver.setCacheable(true);
         return templateResolver;
     }
 

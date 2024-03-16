@@ -12,7 +12,7 @@ services:
       MYSQL_PASSWORD: new
       MYSQL_ROOT_PASSWORD: new
     volumes:
-      - ${MYSQL_VOLUME_PATH}:/var/lib/mysql
+      - ${MYSQL_VOLUME_PATH}:/var/lib/database
     networks:
       - app_network
 
@@ -36,6 +36,7 @@ services:
     image: bitnami/redis
     ports:
       - '6379:6379'
+    restart: always
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:

@@ -5,12 +5,16 @@
     <title>Authorization</title>
 </head>
 <body>
-
 <form>
     <label for="login">Login: </label>
-    <input id="login" placeholder="Type your login" type="text">
-    <button type="submit">Submit!</button>
+    <input id="login" placeholder="Type your login" type="text" name="login">
+    <label for="password">Password: </label>
+    <input id="password" placeholder="Type your password" type="password" name="password">
+    <button type="submit">Log in!</button>
 </form>
+<br/>
+
+<a th:href="@{/sign-up}">Don't have an account yet</a>
 
 </body>
 </html>

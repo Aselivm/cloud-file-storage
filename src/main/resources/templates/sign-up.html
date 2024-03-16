@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+</head>
+<body>
+<form>
+  <label for="login">Login: </label>
+  <input id="login" placeholder="Type your login" type="text" name="login">
+  <label for="password">Password: </label>
+  <input id="password" placeholder="Type your password" type="password" name="password">
+  <button type="submit">Sign up!</button>
+</form>
+<br/>
+
+<a th:href="@{/login}">Already have an account</a>
+
+</body>
+</html>

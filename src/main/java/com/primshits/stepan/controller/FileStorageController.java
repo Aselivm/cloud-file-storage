@@ -28,4 +28,9 @@ public class FileStorageController {
     public String login(){
         return "login";
     }
+
+    @GetMapping("/sign-up")
+    public String signUp(){
+        return "sign-up";
+    }
 }
