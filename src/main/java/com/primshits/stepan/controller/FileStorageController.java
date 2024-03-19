@@ -4,6 +4,7 @@ import com.primshits.stepan.model.MyUser;
 import com.primshits.stepan.service.UserService;
 import lombok.extern.java.Log;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -20,14 +21,16 @@ public class FileStorageController {
         this.service = service;
     }
 
-    @GetMapping("/welcome")
-    public String welcome(){
-        return "Welcome to the unprotected page";
+    @GetMapping("/home")
+    public String welcome(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        model.addAttribute("username", username);
+        return "home";
     }
 
     @GetMapping("/login")
-    public String login(Model model){
-        model.addAttribute("user",new MyUser());
+    public String login(){
         return "login";
     }
 
@@ -40,6 +43,6 @@ public class FileStorageController {
     @PostMapping("/sign-up")
     public String addUser(@ModelAttribute MyUser user) {
         service.addUser(user);
-        return "redirect:/welcome";
+        return "redirect:/login";
     }
 }

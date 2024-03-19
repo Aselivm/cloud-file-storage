@@ -5,11 +5,17 @@
     <title>Authorization</title>
 </head>
 <body>
-<form th:object="${user}">
-    <label for="login">Login: </label>
-    <input id="login" placeholder="Type your login" type="text" th:field="*{name}">
+<div th:if="${param.error}">
+    <div class="alert alert-danger">Invalid Email or Password</div>
+</div>
+<div th:if="${param.logout}">
+    <div class="alert alert-success"> You have been logged out.</div>
+</div>
+<form method="post" th:action="@{/login}">
+    <label for="username">Login: </label>
+    <input id="username" placeholder="Type your login" name="username" type="text">
     <label for="password">Password: </label>
-    <input id="password" placeholder="Type your password" type="password" th:field="*{password}">
+    <input id="password" placeholder="Type your password" type="password" name="password">
     <button type="submit">Log in!</button>
 </form>
 <br/>
