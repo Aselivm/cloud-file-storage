@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -13,6 +15,11 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
     public void addUser(MyUser user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles("ROLE_USER");
         repository.save(user);
+    }
+
+    public Optional<MyUser> findByUsername(String username){
+        return repository.findByName(username);
     }
 }

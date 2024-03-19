@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
     <title>Authorization</title>
 </head>
 <body>
-<form th:object="${user}">
-    <label for="login">Login: </label>
-    <input id="login" placeholder="Type your login" type="text" th:field="*{name}">
+<form  name="f" th:action="@{/perform-login}" method="post" th:object="${user}">
+    <label for="username">Login: </label>
+    <input id="username" placeholder="Type your login" type="text" th:field="*{name}" name="username">
     <label for="password">Password: </label>
-    <input id="password" placeholder="Type your password" type="password" th:field="*{password}">
+    <input id="password" placeholder="Type your password" type="password" th:field="*{password}" name="password">
     <button type="submit">Log in!</button>
 </form>
 <br/>
