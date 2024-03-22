@@ -12,6 +12,7 @@ public class UserService {
     private UserRepository repository;
     private PasswordEncoder passwordEncoder;
     public void addUser(MyUser user){
+        user.setRoles("ROLE_USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.save(user);
     }
