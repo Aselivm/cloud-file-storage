@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Authorization</title>
+    <link rel="icon" type="image/x-icon" th:href="@{img/favicon.ico}">
 </head>
 <body>
 <div th:if="${param.error}">
@@ -13,8 +14,10 @@
 </div>
 <form method="post" th:action="@{/login}">
     <label for="username">Login: </label>
+    <!-- todo autocomplete="username"-->
     <input id="username" placeholder="Type your login" name="username" type="text">
     <label for="password">Password: </label>
+    <!-- todo autocomplete="password"-->
     <input id="password" placeholder="Type your password" type="password" name="password">
     <button type="submit">Log in!</button>
 </form>
