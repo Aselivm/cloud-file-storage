@@ -11,11 +11,52 @@
 <h1>Hello, <span th:text="${username}"></span></h1>
 <a th:href="@{/logout}">Logout</a>
 
-<div class="drop-zone">
+<div id="drop-zone" class="drop-zone">
     <span class="drop-zone__prompt">Drop file here or click to upload</span>
-    <input type="file" name="myFile" class="drop-zone__input">
+    <input type="file" name="file" class="drop-zone__input">
 </div>
 
+<div id="file-name"></div>
+
 <script type="text/javascript" th:src="@{js/main.js}"></script>
+<script>
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.querySelector('.drop-zone__input');
+
+    dropZone.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        dropZone.classList.add('drop-zone--over');
+    });
+
+    dropZone.addEventListener('dragleave', function () {
+        dropZone.classList.remove('drop-zone--over');
+    });
+
+    dropZone.addEventListener('drop', function (e) {
+        e.preventDefault();
+        dropZone.classList.remove('drop-zone--over');
+        fileInput.files = e.dataTransfer.files;
+
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                console.log('File successfully uploaded');
+                window.location.reload();
+            } else {
+                console.error('File upload failed');
+            }
+        }).catch(error => {
+            console.error('Error uploading file:', error);
+        });
+
+        document.getElementById('file-name').innerText = fileInput.files[0].name;
+    });
+</script>
+
 </body>
 </html>
