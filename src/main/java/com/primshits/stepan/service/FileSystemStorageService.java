@@ -33,10 +33,9 @@ public class FileSystemStorageService implements StorageService {
                 throw new StorageException("Failed to store empty file.");
             }
             try (InputStream inputStream = file.getInputStream()) {
-                storageWrapper.putObject(file.getSize(),10,file.getName().toLowerCase(),
+                storageWrapper.putObject(file.getSize(),10,file.getOriginalFilename(),
                         properties.getBucketName(),inputStream);
             }
-            //todo все записывается в один файл под названием "file"
         }
         catch (Exception e) {
             throw new StorageException("Failed to store file.", e);
